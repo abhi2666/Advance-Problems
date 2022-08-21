@@ -38,9 +38,74 @@ void insert_node(node* &head, int val)
     }
 }
 
+int count(node* head)
+{
+    int counter = 0;
+    while(head)
+    {
+        counter++;
+        head = head->next;
+    }
+    return counter;
+}
+
+node* reverse_list(node* midNext)
+{ // reverses the list from mid->next and return the new pointer 
+    // which points at the starting of the new list
+    node* curr = midNext;
+    node* prev = NULL;
+    node* next = NULL;
+
+    while(curr != NULL)
+    {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    return prev;
+
+}
+
+node* get_mid(node* head)
+{
+    // to get the middle element of the list which will be used to reverse 
+    // the list from the middle till the end.
+    node* slow = head;
+    node* fast = head;
+
+    while(fast != NULL && fast->next != NULL)
+    {
+        fast = fast->next->next;
+        slow = slow->next;
+    }
+    return slow;
+}
+
 bool check_palin(node* head)
 {
-    // to be done..
+    // find the middle element
+    node* mid = get_mid(head);
+
+    // now reverse the list from mid->next
+    // 1 2 3 2 1  --> 1->2->3  1->2->NULL;
+
+    node*head2 = reverse_list(mid->next);
+    
+    // check for palindrome
+    node* temp = head;
+    while(head2 != NULL)
+    {
+        if(temp->data != head2->data)
+        {
+            return false;
+        }
+
+        temp = temp->next;
+        head2 = head2->next;
+    }
+    return true;
+
 }
 
 void display(node *root)
@@ -52,6 +117,8 @@ void display(node *root)
     }
     cout<<endl;
 }
+
+
 int main()
 {
     node* head = NULL; 
@@ -64,6 +131,15 @@ int main()
     }
     display(head);
     bool res = check_palin(head);
+    if(res == true)
+    {
+        cout<<"List is a Palindrome"<<endl;
+    }
+    else
+    {
+        cout<<"list is not a Palindorme"<<endl;
+    }
+
 
     return 0;
 }
