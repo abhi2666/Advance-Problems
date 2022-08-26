@@ -4,7 +4,7 @@ using namespace std;
 
 // This is a brute force approach
 
-void set_zero(vector<vector<int>> &mat, int x, int y)
+void set_zero_brute(vector<vector<int>> &mat, int x, int y)
 {
     for (int i = 0; i < mat.size(); i++)
     {
@@ -19,7 +19,7 @@ void set_zero(vector<vector<int>> &mat, int x, int y)
     }
 }
 
-void check_mat(vector<vector<int>> &mat)
+void check_mat_brute(vector<vector<int>> &mat)
 {
     for (int i = 0; i < mat.size(); i++)
     {
@@ -28,7 +28,7 @@ void check_mat(vector<vector<int>> &mat)
             if(mat[i][j] == 0)
             {
                 // if true then set the enrtire row and column to zero
-                set_zero(mat, i, j);
+                set_zero_brute(mat, i, j);
             }
         }
         
@@ -47,6 +47,10 @@ void check_mat(vector<vector<int>> &mat)
     }
     
 }
+
+// This is optimised approach
+
+
 
 void print_matrix(vector<vector<int>> mat)
 {
@@ -78,7 +82,7 @@ int main()
         
     }
     
-    check_mat(matrix);
+    check_mat_brute(matrix);
     print_matrix(matrix);
 
     return 0;
