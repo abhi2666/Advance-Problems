@@ -7,9 +7,17 @@ Reverse pairs --> where i < j and a[i] > 2*a[j]
 #include <iostream>
 using namespace std;
 
-void merge(int a[], int l, int mid, int h)
+int merge(int a[], int l, int mid, int h)
 {
     int i = l, j = mid + 1, k = l, count = 0;
+    for(i = l; i <= mid; i++)
+    {
+        while(j <= h && a[i] > 2*a[j])
+        {
+            count++;
+            j++;
+        }
+    }
     int array[50];
     while (i <= mid && j <= h)
     {
@@ -36,20 +44,20 @@ void merge(int a[], int l, int mid, int h)
     {
         a[i] = array[i];
     }
-    // return count;
+    return count;
 }
 
-void mergeSort(int a[], int l, int h)
+int mergeSort(int a[], int l, int h)
 {
-    int mid, pairs = 0;
-    while (l < h)
+    int mid, res;
+    if(l < h)
     {
         mid = (l + h) / 2;
-        mergeSort(a, l, mid);
-        mergeSort(a, mid + 1, h);
-        merge(a, l, mid, h);
+        int res = mergeSort(a, l, mid);
+        res += mergeSort(a, mid + 1, h);
+        res += merge(a, l, mid, h);
     }
-    // return pairs;
+    return res;
 }
 int main()
 {
