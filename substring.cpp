@@ -4,13 +4,13 @@ longest and have unique elements
 */
 
 #include <iostream>
-#include <map>
+#include <vector>
 using namespace std;
 
 int longestSubstring(string s)
 {
     int left, right, n = s.size();
-    map<char, int> mpp;
+    vector<int> mpp(256, -1);
     left = right = 0;
     int len = 0;
     while(right < n)

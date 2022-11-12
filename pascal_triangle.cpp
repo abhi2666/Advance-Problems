@@ -9,7 +9,7 @@ vector<vector<int>> pascal(int rows)
     for (int i = 0; i < rows; i++)
     {
         //resize the matrix with each increasing rows
-        pasc[i].resize(i + 1);
+        pasc[i].resize(i + 1); //resizing a particular row
         //for each row, make the first and the last element 0
         pasc[i][0] = pasc[i][i] = 1;
 
